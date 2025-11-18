@@ -1,0 +1,16 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Python compiled files
+__pycache__/
+*.py[cod]
+
+# Environment variables (Keep your API keys secret!)
+.env
+
+# IDE specific settings
+.vscode/
+.idea/
+.DS_Store
