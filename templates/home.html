@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spam Shield</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* small adjustment so textarea height is comfortable */
+        textarea { min-height: 160px; }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="card">
+            <header>
+                <h1>Pryog Spam Mail Detector 😎</h1>
+                <p>Paste the suspicious email text and let our ML model decide.</p>
+            </header>
+            <form method="post" novalidate>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Paste email text here...">{{ message|default('') }}</textarea>
+                <button type="submit">Check message</button>
+            </form>
+            {% if prediction %}
+                <div class="result {% if prediction.is_spam %}spam{% else %}ham{% endif %}">
+                    <h2>{{ prediction.label }}</h2>
+                    <p>Confidence: {{ prediction.confidence|round(2) }}</p>
+                    <p>Spam probability: {{ prediction.spam_probability|round(2) }}</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
